@@ -47,4 +47,8 @@ export default {
   color: #bbb;
   cursor: pointer;
 }
+
+.material-icons:hover {
+  color: #777;
+}
 </style>
