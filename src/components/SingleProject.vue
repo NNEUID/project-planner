@@ -1,10 +1,10 @@
 <template>
   <div class="project">
-    <div class="actions" @click="details.show = !details.show">
-      <h3>{{ project.title }}</h3>
+    <div class="actions">
+      <h3 @click="details.show = !details.show">{{ project.title }}</h3>
       <div class="icons">
         <span class="material-icons">edit</span>
-        <span class="material-icons">delete</span>
+        <span class="material-icons" @click="deleteProject">delete</span>
         <span class="material-icons">done</span>
       </div>
     </div>
@@ -20,8 +20,14 @@ export default {
   data() {
     return {
       details: {
-        show: false
-      }
+        show: false,
+      },
+      uri: 'http://localhost:3000/projects/' + this.project.id
+    }
+  },
+  methods: {
+    deleteProject() {
+      fetch(this.uri, { method: 'DELETE' }).then(() => this.$emit('delete', this.project.id)).catch(error => console.log(error))
     }
   }
 };
