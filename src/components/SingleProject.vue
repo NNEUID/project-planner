@@ -1,11 +1,11 @@
 <template>
-  <div class="project">
+  <div class="project" :class="{ complete: project.complete }">
     <div class="actions">
       <h3 @click="details.show = !details.show">{{ project.title }}</h3>
       <div class="icons">
         <span class="material-icons">edit</span>
         <span class="material-icons" @click="deleteProject">delete</span>
-        <span class="material-icons">done</span>
+        <span class="material-icons tick" @click="toggleComplete">done</span>
       </div>
     </div>
     <div class="details" v-if="details.show">
@@ -27,7 +27,16 @@ export default {
   },
   methods: {
     deleteProject() {
-      fetch(this.uri, { method: 'DELETE' }).then(() => this.$emit('delete', this.project.id)).catch(error => console.log(error))
+      fetch(this.uri, { method: 'DELETE' })
+        .then(() => this.$emit('delete', this.project.id))
+        .catch(error => console.log(error))
+    },
+    toggleComplete() {
+      fetch(this.uri, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ complete: !this.project.complete })
+      }).then(() => this.$emit('complete', this.project.id)).catch(error => console.log(error))
     }
   }
 };
@@ -39,6 +48,10 @@ export default {
   padding: 10px 20px;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, .05);
   border-left: 4px solid #e90074;
+}
+
+.project.complete {
+  border-left: 4px solid #00ce89;
 }
 
 .actions {
@@ -56,5 +69,9 @@ export default {
 
 .material-icons:hover {
   color: #777;
+}
+
+.project.complete .tick {
+  color: #00ce89;
 }
 </style>
