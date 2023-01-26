@@ -15,6 +15,11 @@ export default {
       title: '',
       details: ''
     }
+  },
+  methods: {
+    handleSubmit() {
+      console.log(this.title, this.details);
+    }
   }
 }
 </script>
