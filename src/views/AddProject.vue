@@ -18,23 +18,22 @@ export default {
     }
   },
   methods: {
-    async handleSubmit() {
+    handleSubmit() {
       const project = {
         title: this.title,
         details: this.details,
         complete: false
       }
 
-      try {
-        await fetch('http://localhost:3000/projects', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(project)
-        })
+      fetch('http://localhost:3000/projects', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(project)
+      }).then(() => {
         this.$router.push('/')
-      } catch (error) {
-
-      }
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 }
