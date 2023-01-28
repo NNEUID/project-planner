@@ -1,8 +1,19 @@
+<!-- eslint-disable -->
 <template>
+  <Navbar />
   <router-view />
 </template>
-
+<script>
+/* eslint-disable */
+import Navbar from './components/Navbar.vue';
+export default {
+  components: {
+    Navbar
+  }
+}
+</script>
 <style>
+/* eslint-disable */
 body {
   background: #f2f2f2;
 }

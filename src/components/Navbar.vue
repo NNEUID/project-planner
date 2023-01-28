@@ -1,13 +1,17 @@
+<!-- eslint-disable -->
 <template>
-  <nav class="main-nav"></nav>
+  <nav class="main-nav">
+    <router-link :to="{ name: 'home' }">Projects</router-link>
+    <router-link :to="{ name: 'AddProject' }">Add a New Project</router-link>
+  </nav>
 </template>
 
 <script>
+/* eslint-disable */
 export default {
 
 }
 </script>
-
 <style>
-
+/* eslint-disable */
 </style>
