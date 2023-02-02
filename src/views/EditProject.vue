@@ -12,15 +12,22 @@
 <script>
 /* eslint-disable */
 export default {
+  props: ['id'],
   data() {
     return {
-      data() {
-        return {
-          title: '',
-          details: ''
-        }
-      }
+      title: '',
+      details: '',
+      uri: 'http://localhost:3000/projects/' + this.id
+
     }
+  },
+  mounted() {
+    fetch(this.uri)
+      .then(res => res.json())
+      .then(data => {
+        this.title = data.title
+        this.details = data.details
+      })
   }
 }
 </script>
