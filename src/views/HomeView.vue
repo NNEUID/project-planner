@@ -1,6 +1,7 @@
 <!-- eslint-disable -->
 <template>
   <div class="home">
+    <FilterNave @filterChange="current = $event" />
     <div v-if="projects.length">
       <div v-for="project in projects" :key="project.id">
         <SingleProject :project="project" @delete="handleDelete" @complete="handleComplete" />
@@ -12,14 +13,17 @@
 <script>
 /* eslint-disable */
 import SingleProject from "../components/SingleProject.vue";
+import FilterNave from "../components/FilterNav.vue";
 export default {
   name: "HomeView",
   components: {
     SingleProject,
+    FilterNave
   },
   data() {
     return {
       projects: [],
+      current: 'all'
     };
   },
   methods: {
